@@ -1,0 +1,53 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	{{ titulo }}
+{% endblock %}
+
+{% block body %}
+
+	<div class="row justify-content-center">
+		<div
+			class="col-md-8">
+
+			<h1 class="mb-4">{{ titulo }}</h1>
+
+			<div class="card shadow-sm">
+				<div class="card-body">
+
+					{{ form_start(form, { 'attr': { 'enctype': 'multipart/form-data' } }) }}
+
+					<div class="mb-3">
+						{{ form_label(form.titulo) }}
+						{{ form_widget(form.titulo, { 'attr': {'class': 'form-control'} }) }}
+					</div>
+
+					<div class="mb-3">
+						{{ form_label(form.descricao) }}
+						{{ form_widget(form.descricao, { 'attr': {'class': 'form-control'} }) }}
+					</div>
+
+					<div class="mb-3">
+						{{ form_label(form.imagem) }}
+						{{ form_widget(form.imagem, { 'attr': {'class': 'form-control'} }) }}
+					</div>
+
+					<div class="d-flex justify-content-between mt-4">
+						<a href="{{ path('postagem_index') }}" class="btn btn-secondary">
+							⬅ Voltar
+						</a>
+
+						<button type="submit" class="btn btn-primary">
+							💾 Salvar
+						</button>
+					</div>
+
+					{{ form_row(form._token) }}
+					{{ form_end(form, { render_rest: false }) }}
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+{% endblock %}

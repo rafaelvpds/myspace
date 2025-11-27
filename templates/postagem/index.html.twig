@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ titulo }}
+{% endblock %}
+
+{% block body %}
+	<div
+		class="container my-5">
+
+		<!-- TÍTULO -->
+		<h1 class="text-center mb-4 fw-bold">{{ titulo }}</h1>
+
+		<!-- BOTÃO DE NOVA POSTAGEM -->
+		<div class="text-center mb-4">
+			<a href="{{ path('postagem_nova') }}" class="btn btn-primary px-4 py-2 rounded-pill shadow">
+				+ Nova Postagem
+			</a>
+		</div>
+
+		<!-- FORM DE PESQUISA -->
+		<form method="get" class="mb-5">
+			<div class="row justify-content-center">
+				<div class="col-md-6">
+					<label class="form-label fw-semibold">Pesquisar postagem:</label>
+					<div class="input-group shadow-sm">
+						<input type="text" name="query" class="form-control" value="{{ query }}">
+						<button class="btn btn-primary">Buscar</button>
+					</div>
+				</div>
+			</div>
+		</form>
+
+		<!-- LISTA DE POSTAGENS -->
+		<div class="row justify-content-center">
+
+			{% for postagem in postagens %}
+				<div class="col-md-10 mb-4">
+
+					<a href="{{ path('postagem_visualizar', { id: postagem.id }) }}" class="text-decoration-none text-dark">
+
+						<div
+							class="card shadow-sm border-0 rounded-4 overflow-hidden">
+
+							<!-- HEADER COM O NOME DO USUÁRIO -->
+							<div class="card-header bg-white border-0 py-2 px-3">
+								<small class="text-muted fw-semibold">
+									{{ postagem.usuario ? postagem.usuario.nome : 'Anônimo' }}
+								</small>
+							</div>
+
+							<div class="card-body px-4 pb-4">
+
+								<div class="d-flex justify-content-between align-items-start">
+									<div class="flex-grow-1 pe-3">
+										<h5 class="fw-bold mb-1">{{ postagem.titulo }}</h5>
+										<p class="mb-0 text-muted">
+											{{ postagem.descricao | length > 120
+                                        ? postagem.descricao|slice(0,120) ~ '...'
+                                        : postagem.descricao
+                                    }}
+										</p>
+									</div>
+									{% if postagem.imagem %}
+										<div class="rounded overflow-hidden shadow-sm" style="width: 130px; height: 95px;">
+											<img src="{{ asset('uploads/' ~ postagem.imagem) }}" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;">
+										</div>
+									{% endif %}
+
+								</div>
+
+							</div>
+						</div>
+
+					</a>
+
+				</div>
+			{% endfor %}
+
+		</div>
+	</div>
+{% endblock %}

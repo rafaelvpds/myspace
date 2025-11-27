@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="row justify-content-center mt-5">
+		<div style="text-align: center; color: rgba(25, 65, 33, 1);">
+			<h1>BEM VINDO AO MY SPACE</h1>
+		</div>
+		<div class="col-md-4">
+			<div class="card shadow-lg border-0 rounded-4">
+				<div class="card-body p-4">
+
+					<h2 class="text-center mb-4 fw-bold">Login</h2>
+
+					{% if erro %}
+						<div class="alert alert-danger">
+							E-mail ou senha incorretos. Tente novamente.
+						</div>
+					{% endif %}
+
+					<form action="{{ path('login') }}" method="post">
+						<input type="hidden" name="_target_path" value="{{ path('postagem_index') }}">
+
+						<div class="mb-3">
+							<label for="email" class="form-label">E-mail</label>
+							<input type="text" class="form-control" id="email" name="_username" value="{{ lastEmail }}">
+						</div>
+
+						<div class="mb-3">
+							<label for="senha" class="form-label">Senha</label>
+							<input type="password" class="form-control" id="senha" name="_password">
+						</div>
+
+						<div class="d-flex justify-content-between align-items-center mt-4">
+							<a href="{{ path('registro') }}" class="btn btn-outline-secondary">
+								Criar conta
+							</a>
+
+							<button type="submit" class="btn btn-primary">
+								Entrar
+							</button>
+						</div>
+					</form>
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+{% endblock %}

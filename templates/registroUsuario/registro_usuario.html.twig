@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ titulo }}
+{% endblock %}
+
+{% block body %}
+	<div class="row justify-content-center">
+		<div class="col-md-8">
+
+			<h1 class="mb-4">{{ titulo }}</h1>
+
+			<div class="card shadow-sm">
+				<div class="card-body">
+
+					{{ form_start(registrationForm) }}
+
+					<!-- Nome -->
+					<div class="mb-3">
+						{{ form_label(registrationForm.nome) }}
+						{{ form_widget(registrationForm.nome, { 'attr': {'class': 'form-control'} }) }}
+						{{ form_errors(registrationForm.nome) }}
+					</div>
+
+					<!-- Email -->
+					<div class="mb-3">
+						{{ form_label(registrationForm.email) }}
+						{{ form_widget(registrationForm.email, { 'attr': {'class': 'form-control'} }) }}
+						{{ form_errors(registrationForm.email) }}
+					</div>
+
+					<!-- Senha -->
+					<div class="mb-3">
+						{{ form_label(registrationForm.senha) }}
+						{{ form_widget(registrationForm.senha, { 'attr': {'class': 'form-control'} }) }}
+						{{ form_errors(registrationForm.senha) }}
+					</div>
+
+					<div class="d-flex justify-content-between mt-4">
+						<a href="{{ path('login') }}" class="btn btn-secondary">
+							⬅ Voltar
+						</a>
+
+						<button type="submit" class="btn btn-primary">
+							💾 Salvar
+						</button>
+					</div>
+					{{ form_end(registrationForm) }}
+				</div>
+			</div>
+
+		</div>
+	</div>
+{% endblock %}

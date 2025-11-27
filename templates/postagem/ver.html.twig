@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ titulo }}
+{% endblock %}
+
+{% block body %}
+	<div class="container my-5">
+
+		<div class="col-md-10 mx-auto">
+
+			<div class="card shadow border-0 rounded-4">
+
+				<div class="card-header bg-white border-0 py-3 d-flex justify-content-between align-items-center">
+
+					<div>
+						<h3 class="fw-bold mb-0">{{ postagem.titulo }}</h3>
+						<small class="text-muted">
+							{{ postagem.usuario ? postagem.usuario.nome : 'Anônimo' }}
+						</small>
+					</div>
+
+					{% if app.user and postagem.usuario and postagem.usuario.id == app.user.id %}
+						<div class="btn-group">
+							<a href="{{ path('postagem_editar', { id: postagem.id }) }}" class="btn btn-sm btn-outline-warning">
+								Editar
+							</a>
+							<a href="{{ path('postagem_excluir', { id: postagem.id }) }}" onclick="return confirm('Deseja realmente excluir?');" class="btn btn-sm btn-outline-danger">
+								Excluir
+							</a>
+						</div>
+					{% endif %}
+				</div>
+
+				<div class="card-body px-4 pb-4">
+					<p class="mb-4">{{ postagem.descricao }}</p>
+
+					{% if postagem.imagem %}
+						<img src="{{ asset('uploads/' ~ postagem.imagem) }}" class="img-fluid rounded shadow-sm" style="max-height: 400px; object-fit: cover;" alt="">
+					{% endif %}
+
+					<div class="mt-4">
+						<a href="{{ path('postagem_index') }}" class="btn btn-secondary">
+							← Voltar
+						</a>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+{% endblock %}
